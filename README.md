@@ -1,1 +1,1 @@
-# js_sandbox
+# Curso Modern Javascript
