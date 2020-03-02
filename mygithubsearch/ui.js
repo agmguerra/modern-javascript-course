@@ -39,6 +39,14 @@ class UI {
     
   }
 
+  showRepos(repos) {
+    let output = '';
+
+    repos.forEach(repo => {
+      
+    })
+  }
+
   clearProfile() {
     this.profile.innerHTML = '';
   }
