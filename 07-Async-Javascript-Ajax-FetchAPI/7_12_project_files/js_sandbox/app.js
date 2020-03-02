@@ -44,5 +44,9 @@ function getExternal() {
       });
       document.getElementById('output').innerHTML = output;
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      console.log("entrei no catch");
+      
+      console.log(err)
+    });
 }
