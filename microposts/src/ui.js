@@ -29,8 +29,90 @@ class UI {
     })
 
     this.post.innerHTML= output;
-    
   }
+
+  showAlert(message, className) {
+    this.clearAlert();
+
+    // Create div
+    const div = document.createElement('div');
+    // add classes
+    div.className = className;
+    // add text
+    div.appendChild(document.createTextNode(message));
+    // get the parent
+    const container = document.querySelector('.postcontainer');
+    // get posts
+    const posts = document.querySelector('#posts');
+    // insert alert div
+    container.insertBefore(div, posts);
+
+    // timeout
+    setTimeout(() => {
+      this.clearAlert();
+    }, 3000)
+  }
+
+  //clear alert
+  clearAlert() {
+    const currentAlert = document.querySelector('.alert');
+
+    if (currentAlert) {
+      currentAlert.remove();
+    }
+  }
+
+  //clear fields
+  clearFields() {
+    this.titleInput.value = '';
+    this.bodyInput.value = '';
+  }
+
+  //fill form to edit
+  fillForm(data) {
+    this.titleInput.value = data.title;
+    this.bodyInput.value = data.body;
+    this.idInput.value = data.id;
+
+    this.changeFormState('edit');
+  }
+
+  clearIdInput() {
+    this.idInput.value ='';
+  }
+
+  changeFormState(type) {
+    if (type === 'edit') {
+      this.postSubmit.textContent = 'Post It';
+      this.postSubmit.className = 'post-submit btn btn-warning btn-block';
+
+      //Create cancel button
+      const button = document.createElement('button');
+      button.className = 'post-cancel btn btn-light btn-block';
+      button.appendChild(document.createTextNode('Cancel Edit'));
+
+      // get parent
+      const cardForm = document.querySelector('.card-form');
+      // get element to insert before
+      const formEnd = document.querySelector('.form-end');
+
+      //Insert cancel button
+      cardForm.insertBefore(button, formEnd);
+
+    } else {
+      this.postSubmit.textContent = 'Post It';
+      this.postSubmit.className = 'post-submit btn btn-primary btn-block';
+      //remove cancel button
+      if (document.querySelector('.post-cancel')) {
+        document.querySelector('.post-cancel').remove();
+      }
+      //clear ID from hidden field
+      this.clearIdInput();
+      //clear the text fields
+      this.clearFields();
+    }
+  }
+
 }
 
 export const ui = new UI();
